@@ -1,5 +1,5 @@
 def le_nomes():
-    with open('names-scores/0022_names.txt') as arquivo:
+    with open('0022_names.txt') as arquivo:
         nomes = arquivo.read().replace('"', '').split(',')
     return nomes
 
