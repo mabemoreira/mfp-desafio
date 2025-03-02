@@ -3,13 +3,14 @@
 using namespace std;
 using namespace boost::multiprecision; // para não ficar escrevendo o nome da lib frequentemente, igual com std
 
-cpp_int binpow(cpp_int base, cpp_int expoente){
-    cpp_int resposta = 1;
+cpp_int binpow(cpp_int base, cpp_int expoente){ 
+    //calcula base^expoente de maneira mais rápida, já que é baseado na representação binária do expoente
+    cpp_int resposta = 1; // qualquer número elevado a 0 é 1, então sabemos que nossa resposta é no mínimo isso
     while(expoente > 0){
-        if(expoente & 1 == 1)
-            resposta *= base;
-        base *= base;
-        expoente >>= 1;
+        if(expoente & 1 == 1) // se o último bit do expoente é 1, o expoente é ímpar
+            resposta *= base; 
+        base *= base; // base ^2 nos leva aos expoentes pares
+        expoente >>= 1; // divide por 2 para verificar o próximo bit
     }
     return resposta;
 }
@@ -19,8 +20,8 @@ cpp_int soma_digitos(cpp_int potencia){
     cpp_int soma = 0;
     // sabemos que o último dígito de um número é o resto da divisão dele por 10
     while(potencia > 0){
-        soma += potencia % 10;
-        potencia /= 10;
+        soma += potencia % 10; //somo o último dígito
+        potencia /= 10; // faço a divisão inteira, substituindo o último dígito pelo penúltimo até chegar em 0
     }
     return soma;
 }
