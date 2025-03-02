@@ -63,7 +63,7 @@ def main():
     nomes = le_nomes()
     merge_sort(nomes, 0, len(nomes)-1) 
     soma_total = calcula_soma_pontuacao(nomes, letras_valores)
-    print(soma_total)
+    print(f'Pontuação total dos nomes = {soma_total}')
 
 
 

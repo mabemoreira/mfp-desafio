@@ -29,6 +29,6 @@ cpp_int soma_digitos(cpp_int potencia){
 int main(){
     cpp_int potencia = binpow(2,1000);
     cpp_int resposta = soma_digitos(potencia);
-    cout << resposta << endl;
+    cout<<"soma dos dígitos de 2^1000 = "<<resposta<<endl;
     return 0;
 }
