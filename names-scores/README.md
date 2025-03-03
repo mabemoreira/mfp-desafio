@@ -10,9 +10,16 @@ __For example, when the list is sorted into alphabetical order, COLIN, which is 
 __What is the total of all the name scores in the file?__
 🤔
 
-Para resolver isso, após ler o arquivo, criei um dicionário que relacionava cada letra com seu respectivo valor. Depois disso, ordenei os nomes utilizando o Merge Sort (já que é o sort com menor tempo possível). Por fim, fiz a conta como indicado no enunciado
+Para resolver isso, após ler o arquivo, criei um dicionário que relacionava cada letra com seu respectivo valor. Depois disso, ordenei os nomes utilizando o Merge Sort (já que é o sort com menor tempo possível). Por fim, fiz a conta como indicado no enunciado.
 
-Ah! Uma última coisa, o código assume que você está rodando diretamente da pasta names-scores. Caso você não faça isso, ocorrerá um erro na hora de ler o arquivo! 🙃
+O código assume que você está rodando diretamente da pasta names-scores. Caso você não faça isso, ocorrerá um erro na hora de ler o arquivo! 🙃
+
+## Rodando o programa 💻
+Caso esteja usando o VScode, apenas clique em 'Run'. Para rodá-lo no terminal, digite, dentro da pasta names-scores
+```bash
+python3 namesscores.py
+```
+Pronto! O programa deve imprimir a pontuação total dos nomes, que é 871198282.
 
 ## Fontes 📖
 
