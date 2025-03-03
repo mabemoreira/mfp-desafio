@@ -16,7 +16,7 @@ Esse tutorial supõe uma máquina Linux com bash, contudo, é possível adaptá-
 
 Primeiro, baixe o arquivo .tar.gz [aqui](https://www.boost.org/users/download/)
 
-Para extrair o arquivo, rode isso na pasta em que você baixou o arquico(no momento a versão atual é 1_87_0):
+Para extrair o arquivo, rode isso na pasta em que você baixou o arquivo(no momento a versão atual é 1_87_0):
 ```console 
 sudo tar -xzf boost_1_87_0.tar.gz -C /usr/local/boost --strip-components=1
 ```
