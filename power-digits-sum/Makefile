@@ -1,4 +1,3 @@
-
 all: powerdigitssum
 
 powerdigitssum: powerdigitssum.cpp
