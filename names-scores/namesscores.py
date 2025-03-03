@@ -1,44 +1,52 @@
-def le_nomes():
+def le_nomes() -> list:
     '''
-    Lê o arquivo, retira as aspas dos nomes e os coloca na lista nomes
+    Lê o arquivo '0022_names.txt', retira as aspas dos nomes e os coloca em uma lista, que é retornada
     '''
-    with open('0022_names.txt') as arquivo:
-        nomes = arquivo.read().replace('"', '').split(',')
-    return nomes
+    try:
+        with open('0022_names.txt') as arquivo:
+            return arquivo.read().replace('"', '').split(',')
+    except FileNotFoundError:
+        print('Arquivo não encontrado! Você não está rodando do diretório names-scores.')
+        return []
 
 
-def merge(lista, indice_inicio, indice_meio, indice_fim):
+def merge(lista: list, indice_inicio: int, indice_meio: int, indice_fim: int) -> None:
     '''
-    Junta as sub listas ordenadas do merge sort
+    Junta as sublistas ordenadas do merge sort
+
+    Não retorna, pois é in-place
     '''
-    tamanho_esquerda = indice_meio - indice_inicio + 1 
+    tamanho_esquerda = indice_meio - indice_inicio + 1
     tamanho_direita = indice_fim - indice_meio
-    esquerda = [lista[indice_inicio + i] for i in range(tamanho_esquerda)] #copiando a sub lista esquerda não ordenada pra não dar problemas na hora da comparação
-    direita = [lista[indice_meio + 1 + i] for i in range(tamanho_direita)] #mesma coisa para a sub lista direita
-    i = 0 #indice da sub lista esquerda
-    j = 0 #indice da sub lista direita
-    k = indice_inicio #indice da lista original
-    while i < tamanho_esquerda and j < tamanho_direita: #enquanto nenhuma lista acabar
-        if esquerda[i] <= direita[j]:
-            lista[k] = esquerda[i] #se a esquerda é menor ou igual à direita, ela vai pra lista 
-            i += 1 #vamos pra frente na esquerda
+    esquerda = lista[indice_inicio:indice_meio + 1] #copiando as sub listas não ordenadas pra não dar problemas na hora da comparação
+    direita = lista[indice_meio + 1:indice_fim + 1]
+
+    indice_esquerda = indice_direita = 0
+    indice_lista = indice_inicio
+
+    while indice_esquerda < tamanho_esquerda and indice_direita < tamanho_direita: #enquanto nenhuma lista acabar
+        if esquerda[indice_esquerda] <= direita[indice_direita]:
+            lista[indice_lista] = esquerda[indice_esquerda] #se a esquerda é menor ou igual à direita, ela vai pra lista 
+            indice_esquerda += 1
         else:
-            lista[k] = direita[j] #se a direita é menor, ela vai pra lista
-            j += 1 #vamos pra frente na direita
-        k += 1 #nos dois casos a lista continua
-    while i < tamanho_esquerda: #se a direita acabou, mas a esquerda não, copiamos o resto
-        lista[k] = esquerda[i]
-        i += 1
-        k += 1
-    while j < tamanho_direita: #caso igual ao anterior, mas com a direita
-        lista[k] = direita[j]
-        j += 1
-        k += 1
+            lista[indice_lista] = direita[indice_direita] #se a direita é menor, ela vai pra lista
+            indice_direita += 1
+        indice_lista += 1 #nos dois casos a lista continua
+
+    while indice_esquerda < tamanho_esquerda: #se um lado acabou, mas o outro não, copiamos o que sobrou
+        lista[indice_lista] = esquerda[indice_esquerda]
+        indice_esquerda += 1
+        indice_lista += 1
+
+    while indice_direita < tamanho_direita:
+        lista[indice_lista] = direita[indice_direita]
+        indice_direita += 1
+        indice_lista += 1
 
 
-def merge_sort(lista, indice_inicio, indice_fim): 
+def merge_sort(lista: list, indice_inicio: int, indice_fim: int) -> None:
     '''
-    Ordena a lista de nomes in place 
+    Ordena a lista de nomes in-place usando o merge sort
     '''
     #apesar dele ser geralmente usado para números, pela tabela ASCII nada nos impede de usar com letras em palavras
     if indice_inicio < indice_fim:
@@ -47,24 +55,24 @@ def merge_sort(lista, indice_inicio, indice_fim):
         merge_sort(lista, indice_meio + 1, indice_fim)
         merge(lista, indice_inicio, indice_meio, indice_fim)
 
-    
-def calcula_soma_pontuacao(nomes, letras_valores):
+
+def calcula_soma_pontuacao(nomes: list, letras_valores: dict) -> int:
     '''
     Calcula a soma total da pontuação dos nomes
     '''
     soma_total = 0
-    for indice in range(len(nomes)):
-        soma_local = sum(letras_valores[letra] for letra in nomes[indice]) #calcula a soma de cada nome
-        soma_total += soma_local * (indice + 1) #a lista é 0 indexada, mas as positções começam em 1
+    for indice, nome in enumerate(nomes, start=1):
+        pontuacao_nome = sum(letras_valores[letra] for letra in nome)
+        soma_total += pontuacao_nome * indice
     return soma_total
 
+
 def main():
-    letras_valores = {letra: valor for valor, letra in enumerate('ABCDEFGHIJKLMNOPQRSTUVWXYZ', start=1)} #cria um dicionário com as letras e seus valores
+    letras_valores = {letra: valor for valor, letra in enumerate('ABCDEFGHIJKLMNOPQRSTUVWXYZ', start=1)}
     nomes = le_nomes()
-    merge_sort(nomes, 0, len(nomes)-1) 
+    merge_sort(nomes, 0, len(nomes) - 1)
     soma_total = calcula_soma_pontuacao(nomes, letras_valores)
     print(f'Pontuação total dos nomes = {soma_total}')
-
 
 
 if __name__ == '__main__':

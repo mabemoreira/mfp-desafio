@@ -7,7 +7,7 @@ cpp_int binpow(cpp_int base, cpp_int expoente){
     //calcula base^expoente de maneira mais rápida, já que é baseado na representação binária do expoente
     cpp_int resposta = 1; // qualquer número elevado a 0 é 1, então sabemos que nossa resposta é no mínimo isso
     while(expoente > 0){
-        if(expoente & 1 == 1) // se o último bit do expoente é 1, o expoente é ímpar
+        if(expoente & 1) // se o último bit do expoente é 1, o expoente é ímpar
             resposta *= base; 
         base *= base; // base ^2 nos leva aos expoentes pares
         expoente >>= 1; // divide por 2 para verificar o próximo bit

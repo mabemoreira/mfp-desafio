@@ -12,7 +12,7 @@ Contudo, o número em questão é tão grande que mesmo um unsigned long long n�
 
 ## Baixando a biblioteca e configurando o VScode 🖥️
 
-Esse tutorial supõe uma máquina Linux com bash, contudo, é possível adaptá-lo para Windows ou MacOs, mudando apenas como baixar e extrair o arquivo
+Esse tutorial supõe uma máquina Linux com bash, contudo, é possível adaptá-lo para Windows ou MacOs, mudando apenas como baixar e extrair o arquivo. 
 
 Primeiro, baixe o arquivo .tar.gz [aqui](https://www.boost.org/users/download/)
 
@@ -20,7 +20,7 @@ Para extrair o arquivo, rode isso na pasta em que você baixou o arquico(no mome
 ```console 
 sudo tar -xzf boost_1_87_0.tar.gz -C /usr/local/boost --strip-components=1
 ```
-Isso irá extraí-lo em /usr/local/boost.
+Isso irá extraí-lo em /usr/local/boost. _Se você não quer debugar o programa e apenas quer rodá-lo, vá para a seção **Rodando o programa**_
 
 Agora, vá para o VScode na pasta mfp-desafio (ou power-digits-sum) e aperte ```CTRL + Shift + p```. Procure por ```C/C++: Edit Configurations (UI)``` Vá para __Include path__ e adicione o caminho __/usr/local/boost__
 
@@ -41,18 +41,17 @@ Se o JSON estiver assim, não tem problema se o VScode reclamar sobre não encon
 
 ## Rodando o programa 💻
 
-Para compilar o programa, utilize o seguinte comando na pasta power-digits-sum
+Note que este diretório possui um arquivo Makefile, logo, para compilar o programa faça simplesmente, **dentro do diretório power-digits-sum**
 
 ```bash
-g++ -I /usr/local/boost powerdigitssum.cpp -o powerdigitssum
+make
 ```
-Pronto! Rode o programa normalmente com
+Agora, para rodá-lo, faça:
 
 ```bash
-./powerdigitssum
+make run
 ```
-
-O programa deve imprimir a soma de todos os algarismos de \(2^{1000}\), ou seja, 1366
+Pronto! O programa deve imprimir a soma de todos os algarismos de \(2^{1000}\), ou seja, 1366
 
 ## Fontes 📖
 [CP algorithms](https://cp-algorithms.com/algebra/binary-exp.html) para a implementação do Binpow. [Documentação do Boost Multiprecision](https://www.boost.org/doc/libs/1_86_0/libs/multiprecision/doc/html/index.html). Também utilizei o Deep Seek __SOMENTE__ para me auxiliar com o processo de baixar a biblioteca 
